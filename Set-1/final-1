@@ -1,0 +1,135 @@
+1. import products table from mysql to hdfs
+database - retail_db, table products
+username - root, password - cloudera
+	-save as textfile with comma as delimiter at /user/cloudera/problem1/solution
+	-import id,cat_id,name,price,image columns only
+	-import all products whose price is below 100.00
+
+
+2. export orderItems data into mysql table from hdfs
+database - sample, table orderItems
+username - root, password - cloudera
+	-mysql table is already created
+	-orderItems data is located in hdfs at /user/cloudera/problem2/orderItems
+
+
+3. the products records are stored in metastore table called products in problem3 database
+	product_id            		int                 	                    
+	product_category_id          	int           	                    
+	product_name		   	string                 	                    
+	product_description       	string
+	product_price			float
+	product_image			string
+
+	-place result in hdfs at /user/cloudera/problem3/solution
+	-the file should be in parquet with snappy compression
+	-the schema should be same as input table
+	-only retrieve records whose price > 10
+
+
+4. orders data needs to be converted into gzip compressed parquet files
+	-orders data is stored in hdfs at /user/cloudera/problem4/data/orders
+	-place the result data in hdfs at /user/cloudera/problem4/solution
+	-Output should contain following columns
+
+	order_id            	int                 	                    
+	order_date          	timestamp           	                    
+	order_customer_id   	int            
+	order_status        	string
+
+
+5. find no of customers live in each city of the country
+	-Records are stored in HDFS at /user/cloudera/problem5/data/customers
+	-the file contains following columns:
+customer_id		int
+customer_fname		string
+customer_lname		string
+customer_email		string
+customer_password	string
+customer_street		string
+customer_city		string
+customer_state		string
+customer_zipcode	string
+
+	-place result data in hdfs at /user/cloudera/problem5/solution
+	-use text format with tab as columnar delimiter
+	-result should contain single entry of each city
+	-output city, state and total no.of customers live in that city
+
+
+6.customers data is stored as parquet at /user/cloudera/problem6/data/customers and has the following columns:
+
+customer_id		int
+customer_fname		string
+customer_lname		string
+customer_email		string
+customer_password	string
+customer_street		string
+customer_city		string
+customer_state		string
+customer_zipcode	string
+
+	-column alias should be displayed as customer_fname followed by customer_lname
+	-place result in hdfs at /user/cloudera/problem6/solution
+	-use parquet with snappy compression to store result
+	-output should have following columns
+
+customer_id		int
+customer_fname		string
+customer_lname		string
+alias			string
+
+
+7.orders data is stored as tab seperated in hdfs at /user/cloudera/problem7/data/orders and customers data is stored as tab seperated at /user/cloudera/problem7/data/customers
+	
+-orders data have following columns
+	order_id            	int                 	                    
+	order_date          	timestamp           	                    
+	order_customer_id   	int            
+	order_status        	string
+
+-customers data have following columns
+customer_id		int
+customer_fname		string
+customer_lname		string
+customer_email		string
+customer_password	string
+customer_street		string
+customer_city		string
+customer_state		string
+customer_zipcode	string
+
+
+	-customer_id is foriegn key in customers table
+	-place the output in hdfs directory at /user/cloudera/problem7/solution
+	-output should have customer_fullname, order_id columns only
+	-customer_fullname should be as first letter of (fname "space" lname)
+	-result should be stored in textfile with tab as delimiter
+
+
+8.orders data is in hdfs at /user/cloudera/problem8/data/orders
+	-orders data have following columns
+	order_id            	int                 	                    
+	order_date          	timestamp           	                    
+	order_customer_id   	int            
+	order_status        	string
+
+
+	-output should have fullname and date columns
+	-fullname is (order_id 'space' order_customer_id) and date should be anniversay date like month and day (11/13)
+	-store the result as tab separated text in hdfs directory at /user/cloudera/problem8/solution
+
+
+9.products data is stored as tab seperated in hdfs as tab delimited at /user/cloudera/problem9/data/products and has following columns:
+product_id            		int                 	                    
+product_category_id          	int           	                    
+product_name		   	string                 	                    
+product_description       	string
+product_price			float
+product_image			string
+
+	-find avg price for each category
+	-output should contain product_category_id, avg_product_price columns only
+	-output should be stored as text with comma delimiter in hdfs at /user/cloudera/problem9/solution
+
+

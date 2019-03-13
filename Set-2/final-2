@@ -1,0 +1,145 @@
+1. import customers table from mysql to hdfsdatabase - quesquareDB, table customers
+username - root, password - cloudera
+	-save as textfile tab delimited at /user/cloudera/problem1/solution
+	-import customerNumber,customerName,phone,city,state,salesRepEmployeeNumber columns only
+	-import all customers who live in USA
+
+
+2. export customers data into mysql table from hdfs
+database - sample, table - customers
+username - root, password - cloudera
+	-mysql table is already created
+	-customers data is located in hdfs at /user/cloudera/problem2/data/customers
+
+
+3. the payments records are stored in metastore table called payments in problem3 database
+	customerNumber 	int                 	                    
+	checkNumber    	string           	                    
+	paymentDate   	timestamp                 	                    
+	amount        	float
+
+	-place result in hdfs at /user/cloudera/problem3/solution
+	-the file should be in parquet with GZIP compression
+	-only retrieve records whose amount is greater than 2000
+	-the schema should be same as input table
+
+
+4. orders data needs to be converted into gzip compressed parquet files
+	-orders data is stored in hdfs at /user/cloudera/problem4/data/orders
+	-place the result data in hdfs at /user/cloudera/problem4/solution
+	-Output should contain following columns
+
+	order_id            	int                 	                    
+	order_date          	timestamp           	                    
+	order_customer_id   	int            
+	order_status        	string
+
+
+5. find no of customers live in each city of the country
+	-Records are stored in HDFS at /user/cloudera/problem5/data/customers
+	-the file contains following columns:
+customer_id		int
+customer_fname		string
+customer_lname		string
+customer_email		string
+customer_password	string
+customer_street		string
+customer_city		string
+customer_state		string
+customer_zipcode	string
+
+	-place result data in hdfs at /user/cloudera/problem5/solution
+	-use csv to store result
+	-result should contain single entry of each city
+	-output city, state and total no.of customers live in that city
+
+
+6.customers data is at /user/cloudera/problem6/data/customers and has the following columns:
+
+customer_id		int
+customer_fname		string
+customer_lname		string
+customer_email		string
+customer_password	string
+customer_street		string
+customer_city		string
+customer_state		string
+customer_zipcode	string
+
+	-customer_name should be displayed as first letter of customer_lname followed by customer_fname
+	-place result in hdfs at /user/cloudera/problem6/solution
+	-use textfile with tab delimited to store result
+	-find all customers who live in New York (NY) state
+	-output should have following columns
+
+customer_id		int
+customer_name		string
+customer_email		string
+customer_city		string
+
+
+7.orders data is in hdfs at /user/cloudera/problem7/data/orders and customers data in /user/cloudera/problem7/data/customers
+	-orders data have following columns
+	order_id            	int                 	                    
+	order_date          	timestamp           	                    
+	order_customer_id   	int            
+	order_status        	string
+	
+	-customers data have following columns
+customer_id		int
+customer_fname		string
+customer_lname		string
+customer_email		string
+customer_password	string
+customer_street		string
+customer_city		string
+customer_state		string
+customer_zipcode	string
+
+	-find no of orders placed by each customer
+	-place the output in hdfs directory at /user/cloudera/problem7/solution
+	-output should have customer_id, customer_fname, customer_lname, customer_email, total_orders columns only
+	-result should be stored in textfile with gzip compression
+
+
+8.orders data is in hdfs at /user/cloudera/problem8/data/orders
+	-orders data have following columns
+	order_id            	int                 	                    
+	order_date          	timestamp           	                    
+	order_customer_id   	int            
+	order_status        	string
+
+	-orderItems data is stored in hdfs at /user/cloudera/problem8/data/orderItems and has following columns:
+order_item_id			int
+order_item_order_id		int
+order_item_product_id		int
+order_item_quantity		int
+order_item_subtotal		float
+order_item_product_price	float
+
+	-products data is stored in hdfs at /user/cloudera/problem8/data/products and has following columns:
+product_id            		int                 	                    
+product_category_id          	int           	                    
+product_name		   	string                 	                    
+product_description       	string
+product_price			float
+product_image			string
+
+	-join the tables and satisfy the below statements
+	-order_status is PENDING_PAYMENT and product_price >=100.00
+	-output should have these columns: order_id, order_date, order_customer_id, order_item_id, order_item_quantity, order_item_subtotal, product_id, product_category_id, product_name, product_price
+	-store the result as parquet with gzip compression in hdfs directory at /user/cloudera/problem8/solution
+
+
+9.orderItems data is stored as parquet in hdfs at /user/cloudera/problem9/data/orderItems and has following columns:
+	order_item_id			int
+	order_item_order_id		int
+	order_item_product_id		int
+	order_item_quantity		int
+	order_item_subtotal		float
+	order_item_product_price	float
+
+	-find total quantity sold for each product
+	-output should contain order_item_product_id, order_item_product_price and total_quantity columns only
+	-output should be stored as parquet with snappy in hdfs at /user/cloudera/problem9/solution
+

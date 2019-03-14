@@ -1,0 +1,1 @@
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table products --as-parquetfile --compression-codec "SNAPPY" --target-dir "/user/cloudera/problem1/solution" --columns "product_id, product_category_id, product_name, product_price, product_image" --where "product_price < 100.00" -m 1

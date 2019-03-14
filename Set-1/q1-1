@@ -1,0 +1,1 @@
+sqoop import --connect jdbc:mysql://localhost/retail_db --table products --username root --password cloudera --as-textfile --fields-terminated-by ',' --target-dir /user/cloudera/problem1/solution --columns "product_id, product_category_id,producct_name, product_image,product_price" --where "product_price < 100.00" -m 1

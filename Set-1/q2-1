@@ -1,0 +1,1 @@
+sqoop export --connect jdbc:mysql://localhost/sample --table orderItems --username root --password cloudera --export-dir /user/cloudera/problem2/orderItems

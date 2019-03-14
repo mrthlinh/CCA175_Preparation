@@ -1,0 +1,52 @@
+1. hdfs dfs -rm -r /user/cloudera/*
+
+2. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table order_items --m 1 --fields-terminated-by '|' --as-textfile --target-dir /user/cloudera/problem2/orderItems
+
+mysql -uroot -pcloudera
+
+create database sample;
+create table sample.orderItems like retail_db.order_items;
+
+3.sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table products --m 1 --target-dir /user/cloudera/products
+	drop database problem3;
+	create database problem3;
+	create table problem3.products(product_id int, product_category_id int, product_name string, product_description string, product_price float, product_image string)
+	row format delimited
+	fields terminated by ','
+	STORED AS TEXTFILE;
+	load data inpath /user/cloudera/products into table problem3.products;
+hdfs dfs -rm -r /user/cloudera/products
+
+4. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table orders --m 1 --fields-terminated-by '\t' --as-textfile --target-dir /user/cloudera/problem4/data/orders
+
+5. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table customers --m 1 --fields-terminated-by '|' --as-textfile --target-dir /user/cloudera/problem5/data/customers
+
+6. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table customers --m 1 --target-dir /user/cloudera/problem6/data/customers
+
+7. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table orders --m 1 --fields-terminated-by '\t' --as-textfile --target-dir /user/cloudera/problem7/data/orders
+
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table customers --m 1 --fields-terminated-by '\t' --as-textfile --target-dir /user/cloudera/problem7/data/customers
+
+8. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table orders --m 1 --target-dir /user/cloudera/problem8/data/orders
+
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table order_items --as-parquetfile --m 1 --target-dir /user/cloudera/problem8/data/orderItems
+
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table products --as-parquetfile --m 1 --target-dir /user/cloudera/problem8/data/products
+
+9. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table order_items --fields-terminated-by '|' --as-textfile --m 1 --target-dir /user/cloudera/problem9/data/orderItems
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

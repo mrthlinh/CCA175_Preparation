@@ -85,3 +85,31 @@ The path given in the problem can be used directly.
 - In spark, it’s better to check the data if it is loaded by typing .show() after
 creating the data frame.
 - Don’t be nervous because you have all the tips now.
+
+## Spark
+__Import__
+```python
+from pyspark import SparkContext, SQLContext
+from pyspark.sql import *
+```
+
+__Read File__
+```Python
+orderLine = sc.textFile("hdfs://localhost:8020/user/cloudera/problem8/data/orders")
+orderItemDF = sqlContext.read.parquet("hdfs://localhost:8020/user/cloudera/problem8/data/orderItems")
+```
+
+__Common functions__
+```python
+date_format(orderDF.order_date,'MM/dd')
+concat(col*)
+substring(str,pos,len)
+lit(' ')
+```
+
+__Export__
+```python
+df_output.coalesce(1).write.option("delimiter","\t").csv("hdfs://localhost:8020/user/cloudera/problem5/solution")
+
+df_output.coalesce(1).write.option("compression","GZIP").parquet("hdfs://localhost:8020/user/cloudera/problem5/solution")
+```

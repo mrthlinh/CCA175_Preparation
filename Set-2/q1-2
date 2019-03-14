@@ -1,0 +1,1 @@
+sqoop import --connect jdbc:mysql://localhost/quesquareDB --username root --password cloudera --table customers --as-textfile --fields-terminated-by '\t' --target-dir "/user/cloudera/problem1/solution" --columns "customerNumber,customerName,phone,city,state,salesRepEmployeeNumber" --where "country = 'USA'" -m 1

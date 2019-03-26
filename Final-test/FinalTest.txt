@@ -1,0 +1,100 @@
+
+--------- pre requisite -----------------
+Please import the data into HDFS from MySql tables
+
+retail_db.orders               /user/cloudera/CCA/orders
+retail_db.order_items         /user/cloudera/CCA/order_items
+retail_db.customers           /user/cloudera/CCA/customers
+retail_db.products           /user/cloudera/CCA/retail_products
+retails_db.categories        /user/cloudera/CCA/categories
+sales.sale                   /user/cloudera/CCA/sale
+sales.product               /user/cloudera/CCA/product
+
+---------------------------------------------------------------------------------------------------------------------
+
+Q1) import the data from MysqlDB to to /user/cloudera/CCA/problem1/products
+
+     Database 	: sales
+     Table   	:  product
+     userName	: root
+     password 	: cloudera
+     compression : snappy
+     fileformat  : avro
+     
+Q2) export customers data into mysql table from hdfs
+	database - sample, table customers_export
+	username - root, password - cloudera
+	
+
+Q3)  the orders records are stored in metastore table called orders in problem3 database
+	
+	order_id            	int                 	                    
+	order_date          	timestamp           	                    
+	order_customer_id   	int            
+	order_status        	string
+
+	-place result in hdfs at /user/cloudera/CCA/TR3
+	-the file should be in parquet with snappy compression
+	-the schema should be same as input table
+	-only retrieve records whose status is pending
+
+Q4) Load the datasets orders and order_items
+
+    -- Join the data using order_id 
+    -- Calculate total order placed for each date sorted by date
+    -- store the results in parquet format with snappy compression at  /user/cloudera/CCA/TR4
+    
+Q5) Load the data from /user/cloudera/CCA/problem1/products
+
+    -- Calculate maximum, minimum, average and price total of all the products for each code
+    -- sort the results on price total
+    -- store the results in parquet with zgip compression at /user/cloudera/CCA/TR5
+    
+    
+Q6)  find no of customers live in each city with age less between 25 and 40
+	-Records are stored in HDFS at /user/cloudera/CCA/customers
+	-the file contains following columns:
+customer_id		int
+customer_fname		string
+customer_lname		string
+customer_email		string
+customer_password	string
+customer_street		string
+customer_city		string
+customer_state		string
+customer_zipcode	string
+
+	-place result data in hdfs at /user/cloudera/CCA/TR6
+	-use text format with tab as columnar delimiter
+	-result should contain single entry of each city
+	-output city, state and total no.of customers live in that city
+	
+Q7)  find the difference between revenue(total price) of each product and best selling product of each category
+
+     -- Records are stored at /user/cloudera/CCA/sale
+                              /user/cloudera/CCA/products
+                                       
+     -- place result data in hdfs at /user/cloudera/CCA/TR7      
+     -- output brand_Name, Category revenue and sales_diffrence
+     -- use parquet file format with snappy compression
+     
+Q8)  find the total number of orders, average revenue for each city
+
+    -- Records are stored at /user/cloudera/CCA/customers
+                             /user/cloudera/CCA/orders
+                             /user/cloudera/CCA/orders_items
+                             
+    -- place result data in hdfs at /user/cloudera/CCA/TR8      
+    -- output City, State, total_no_of_orders, revenue
+    -- use avro file format with gzip compression   
+    
+           
+        
+        
+Q9)     Records are stored at /user/cloudera/CCA/retail_products
+                              /user/cloudera/CCA/categories
+     
+        product_category_id is the foreign key for products data.
+        Place the result in HDFS directory /user/cloudera/problem7/solution/.
+        use text format with a tab as the columnar delimiter.
+        The output must have the first column that has (product_name,space,category_name) and price for each product.

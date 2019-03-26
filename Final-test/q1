@@ -1,0 +1,1 @@
+sqoop import --connect jdbc:mysql://localhost/sales --username root --password cloudera --table product --as-avrodatafile --target-dir /user/cloudera/CCA/problem1/products --m 1 --compression-codec snappy

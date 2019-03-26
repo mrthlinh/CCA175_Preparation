@@ -1,0 +1,49 @@
+1.
+--
+
+2.
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table customers --m 1 --fields-terminated-by '\t' --target-dir /user/cloudera/CCA/customers
+
+create database sample;
+create table sample.customers_export like retail_db.customers;
+
+3. 
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table orders --m 1 --target-dir /user/cloudera/orders
+
+create table orders(
+	order_id int,                 	                    
+	order_date timestamp,           	                    
+	order_customer_id int,            
+	order_status string)
+row format delimited
+fields terminated by ','
+stored as textfile;
+
+load data inpath '/user/cloudera/orders' into table orders;
+
+hdfs dfs -rm -r /user/cloudera/orders
+
+4.
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table orders --m 1 --target-dir /user/cloudera/CCA/orders
+
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table order_items --m 1 --target-dir /user/cloudera/CCA/order_items
+
+5.
+---
+
+6.
+---
+
+7.
+sqoop import --connect jdbc:mysql://localhost/sales --username root --password cloudera --table sale --m 1 --target-dir /user/cloudera/CCA/sale
+
+sqoop import --connect jdbc:mysql://localhost/sales --username root --password cloudera --table product --m 1 --target-dir /user/cloudera/CCA/product
+
+8.
+---
+
+9.
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table product --m 1 --target-dir /user/cloudera/CCA/retail_products
+
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table categories --m 1 --target-dir /user/cloudera/CCA/categories
+

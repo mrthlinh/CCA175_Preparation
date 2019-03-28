@@ -14,7 +14,7 @@ create table sample.orderItems like retail_db.order_items;
 	row format delimited
 	fields terminated by ','
 	STORED AS TEXTFILE;
-	load data inpath /user/cloudera/products into table problem3.products;
+	load data inpath "/user/cloudera/products" into table problem3.products;
 hdfs dfs -rm -r /user/cloudera/products
 
 4. sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table orders --m 1 --fields-terminated-by '\t' --as-textfile --target-dir /user/cloudera/problem4/data/orders

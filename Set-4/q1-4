@@ -1,0 +1,1 @@
+sqoop import --connect jdbc:mysql://localhost/retail_db --username root --password cloudera --table customers --m 1 --as-textfile --target-dir /user/cloudera/problem1/solution --columns "customer_id, customer_fname, customer_lname, customer_city, customer_state"

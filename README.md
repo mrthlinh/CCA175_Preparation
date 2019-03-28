@@ -86,6 +86,8 @@ The path given in the problem can be used directly.
 creating the data frame.
 - Don’t be nervous because you have all the tips now.
 
+## Sqoop
+
 ## Spark
 __Import__
 ```python
@@ -97,6 +99,10 @@ __Read File__
 ```Python
 orderLine = sc.textFile("hdfs://localhost:8020/user/cloudera/problem8/data/orders")
 orderItemDF = sqlContext.read.parquet("hdfs://localhost:8020/user/cloudera/problem8/data/orderItems")
+
+# Creates a DataFrame from a directory
+df = sqlContext.read.format("com.databricks.spark.avro").load("input dir")
+
 ```
 
 __Common functions__
@@ -112,4 +118,8 @@ __Export__
 df_output.coalesce(1).write.option("delimiter","\t").csv("hdfs://localhost:8020/user/cloudera/problem5/solution")
 
 df_output.coalesce(1).write.option("compression","GZIP").parquet("hdfs://localhost:8020/user/cloudera/problem5/solution")
+
+#  Saves the subset of the Avro records read in
+df.where("age > 5").write.format("com.databricks.spark.avro").save("output dir")
+
 ```

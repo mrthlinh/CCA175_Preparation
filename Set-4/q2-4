@@ -1,0 +1,1 @@
+sqoop export --connect jdbc:mysql://localhost/sample --username root --password cloudera --table products --m 1 --input-fields-terminated-by '|' --export-dir /user/cloudera/problem2/products
